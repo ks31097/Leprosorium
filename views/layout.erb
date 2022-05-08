@@ -51,10 +51,13 @@
             </div>
           </nav>
 
-            <div>
-              <%= yield %>
-            </div>
+          <div>
+            <%if @error && @error.length >= 0 then %> <!-- Проверка на наличие ошибки, по умолчаниб ошибка (@error) задана в barbershop.rb, длина @error = 0 -->
+                <div class="alert alert-danger" role="alert"><%= @error %></div>
+            <% end %>
 
+            <%= yield %>
+          </div>
         </div>
   </body>
 </html>

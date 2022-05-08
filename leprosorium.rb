@@ -3,7 +3,7 @@ require 'sinatra'
 require 'sinatra/reloader'
 
 get '/' do
-  erb "Greeting you in our barbershop!"
+  erb "Greeting you in Leprosorium!"
 end
 
 get '/new' do

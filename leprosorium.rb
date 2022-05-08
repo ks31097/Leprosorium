@@ -8,12 +8,19 @@ def init_db
   @db.results_as_hash = true
 end
 
+# метод before выполняется каждый раз перед выполнением любого запроса
+# например при перезагрузки любой страницы
 before do
+# инициализация БД
   init_db
 end
-
+# метод configure вызывается каждый раз при конфигурации приложения:
+# когда изменился код программы / перезагрузилась страница
 configure do
-  init_db # метод init_db не исполняется при конфигурации, что приводит к ошибке
+# инициализация БД
+# метод init_db не исполняется при конфигурации, что приводит к ошибке
+  init_db
+# создаем таблицу если таблица не существует
   @db.execute 'CREATE TABLE IF NOT EXISTS Posts
   (
 	   id	INTEGER, created date	DATE,
@@ -26,12 +33,17 @@ get '/' do
   erb "Greeting you in Leprosorium!"
 end
 
+# обработчик get-запроса /new
+# (браузер получает страницу с сервера)
 get '/new' do
   erb :new
 end
 
+# обработчик post-запроса /new
+# (браузер отправляет страницу на сервер)
 post '/new' do
-  @user_post = params[:content] # получить, то что отправил браузер со страницы new.erb <textarea name="content" class="form-control" placeholder="Type post text here" id="floatingTextarea2" style="height: 150px"></textarea>
+# получаем переменную из post-запроса браузера со страницы new.erb <textarea name="content" class="form-control" placeholder="Type post text here" id="floatingTextarea2" style="height: 150px"></textarea>
+  @user_post = params[:content]
 
   erb "You typed: #{@user_post}"
 end

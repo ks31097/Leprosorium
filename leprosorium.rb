@@ -3,13 +3,11 @@ require 'sinatra'
 require 'sinatra/reloader'
 
 get '/' do
-  @title = "Barbershop"
   erb "Greeting you in our barbershop!"
 end
 
-get '/about' do
-  @title = "О нас"
-  erb :about
+get '/new' do
+  erb :new
 end
 
 get '/contacts' do

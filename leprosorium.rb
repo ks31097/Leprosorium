@@ -10,23 +10,11 @@ get '/new' do
   erb :new
 end
 
-get '/contacts' do
-  @title = 'Контакты'
-  erb :contacts
-end
+post '/new' do
+  @user_post = params[:content] # получить, то что отправил браузер со страницы new.erb <textarea name="content" class="form-control" placeholder="Type post text here" id="floatingTextarea2" style="height: 150px"></textarea>
+  @message = 'Ваш пост отправлен!'
 
-post '/contacts' do
-        @user_email = params[:user_email] # получить, то что отправил браузер
-        @user_message = params[:user_message] # получить, то что отправил браузер
-
-        @title = 'Контакты'
-        @message = 'Информация успешно отправлена!'
-
-        output = File.open('./public/contacts.txt', 'a')
-        output.write "User email: #{@user_email}, user message: #{@user_message}\n"
-        output.close
-
-        erb :message
+  erb "You typed: #{@user_post}"
 end
 
 get '/visit' do

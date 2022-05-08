@@ -8,12 +8,18 @@ def init_db
   @db.results_as_hash = true
 end
 
-configure do
-  
-end
-
 before do
   init_db
+end
+
+configure do
+  init_db # метод init_db не исполняется при конфигурации, что приводит к ошибке
+  @db.execute 'CREATE TABLE IF NOT EXISTS Posts
+  (
+	   id	INTEGER, created date	DATE,
+     content	TEXT, PRIMARY KEY(id AUTOINCREMENT)
+  );'
+
 end
 
 get '/' do

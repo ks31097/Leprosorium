@@ -30,6 +30,10 @@ configure do
 end
 
 get '/' do
+  # выбрать список постов из БД
+  # 'select * from Posts oreder by id desc' - отсортировать вывод из БД по id
+  # в порядке убывания от большего к меньшему
+  @results = @db.execute 'select * from Posts oreder by id desc'
   erb :index
 end
 

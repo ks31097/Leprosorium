@@ -42,13 +42,15 @@ end
 # обработчик post-запроса /new
 # (браузер отправляет страницу на сервер)
 post '/new' do
-# получаем переменную из post-запроса браузера со страницы new.erb <textarea name="content" class="form-control" placeholder="Type post text here" id="floatingTextarea2" style="height: 150px"></textarea>
+  # получаем переменную из post-запроса браузера со страницы new.erb <textarea name="content" class="form-control" placeholder="Type post text here" id="floatingTextarea2" style="height: 150px"></textarea>
   @user_post = params[:content]
 
   if @user_post.length <= 0
     @error = 'Type post text'
     return erb :new # возврат представления new.erb
   end
+  # сохранение данных в БД сщ страницы /new
+  @db.execute 'insert into Posts (created, content) values (datetime(), ?)', [@user_post]
 
   erb "You typed: #{@user_post}"
 end

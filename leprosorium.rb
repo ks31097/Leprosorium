@@ -44,7 +44,7 @@ get '/new' do
 end
 
 # обработчик post-запроса /new
-# (браузер отправляет страницу на сервер)
+# (браузер отправляет страницу на серверб мы их принимаем)
 post '/new' do
   # получаем переменную из post-запроса браузера со страницы new.erb <textarea name="content" class="form-control" placeholder="Type post text here" id="floatingTextarea2" style="height: 150px"></textarea>
   @user_post = params[:content]
@@ -73,6 +73,17 @@ get '/details/:post_id' do
   @row = results[0]
   # возвращаем представление details.erb
   erb :details
+end
+
+# обработчик post-запроса /details/...
+# # (браузер отправляет страницу на сервер, мы их принимаем)
+post '/details/:post_id' do
+# получаем переменную из URL <a href="/details/<%= post['id'] %>">Comments<a>
+post_id = params[:post_id]
+
+# получаем переменную из post-запроса браузера со страницы details.erb <textarea name="content" class="form-control" placeholder="Type post text here" id="floatingTextarea2" style="height: 150px"></textarea>
+@user_post = params[:content]
+erb "You typed comment #{@user_post} for post #{post_id}"
 end
 
 not_found do

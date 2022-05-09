@@ -2,12 +2,12 @@
 <br />
 <% @results.each do |post| %>
     <p>
-      <%= post['content']%>
+      <%= post['content'] %>
       <br />
-      Added at <%= post['created']%>
+      Added at <%= post['created'] %>
       <br />
       <!-- Добавить возможность комментировать пост -->
-      <a href="/details/<%= post['id'] %>">Comments<a>
+      <a href="/details/<%= post['id'] %>">Comments</a>
     </p>
     <hr />
 <% end %>

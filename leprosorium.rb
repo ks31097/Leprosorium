@@ -60,11 +60,15 @@ post '/new' do
   redirect to '/'
 end
 
-# вывод информации о посте; post_id - номер поста в БД, post_id "береться" из страницы index.erb <a href="/details/<%= post['id'] %>">Comments<a>
+# вывод информации о посте; post_id - номер поста в БД, post_id "береться" из страницы index.erb
+# получаем параметр из URL <a href="/details/<%= post['id'] %>">Comments<a>
 get '/details/:post_id' do
   post_id = params[:post_id]
 
-  erb "Displaying information for post with id #{post_id}"
+  results = @db.execute 'select * from Posts where id=?', [post_id]
+  @row = results[0]
+
+  erb :details
 end
 
 not_found do

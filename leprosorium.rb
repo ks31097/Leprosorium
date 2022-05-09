@@ -30,7 +30,7 @@ configure do
 end
 
 get '/' do
-  erb "Greeting you in Leprosorium!"
+  erb :index
 end
 
 # обработчик get-запроса /new
@@ -49,7 +49,7 @@ post '/new' do
     @error = 'Type post text'
     return erb :new # возврат представления new.erb
   end
-  # сохранение данных в БД сщ страницы /new
+  # сохранение данных в БД со страницы /new
   @db.execute 'insert into Posts (created, content) values (datetime(), ?)', [@user_post]
 
   erb "You typed: #{@user_post}"

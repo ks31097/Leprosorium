@@ -66,3 +66,7 @@ get '/details/:post_id' do
 
   erb "Displaying information for post with id #{post_id}"
 end
+
+not_found do
+  erb :not_found
+end

@@ -56,5 +56,6 @@ post '/new' do
   # сохранение данных в БД со страницы /new
   @db.execute 'insert into Posts (created, content) values (datetime(), ?)', [@user_post]
 
-  erb "You typed: #{@user_post}"
+  # перенаправление на главную страницу
+  redirect to '/'
 end

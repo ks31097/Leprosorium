@@ -59,3 +59,10 @@ post '/new' do
   # перенаправление на главную страницу
   redirect to '/'
 end
+
+# вывод информации о посте; post_id - номер поста в БД, post_id "береться" из страницы index.erb <a href="/details/<%= post['id'] %>">Comments<a>
+get '/details/:post_id' do
+  post_id = params[:post_id]
+
+  erb "Displaying information for post with id #{post_id}"
+end

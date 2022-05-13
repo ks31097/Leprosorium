@@ -90,7 +90,12 @@ post_id = params[:post_id]
 
 # получаем переменную из post-запроса браузера со страницы details.erb <textarea name="content" class="form-control" placeholder="Type post text here" id="floatingTextarea2" style="height: 150px"></textarea>
 @user_post = params[:content]
-erb "You typed comment #{@user_post} for post #{post_id}"
+
+# сохранение данных в БД со страницы /new
+@db.execute 'insert into Comments (created, content, post_id) values (datetime(), ?, ?)', [@user_post, post_id]
+
+# перенаправление на страницу поста
+redirect to('/details/' + post_id)
 end
 
 not_found do
